@@ -23,44 +23,43 @@ const WhyChooseUS = ({ items }) => {
   };
 
   return (
-    <section className="px-10 sm:px-10 mx-auto mt-10">
+    <section className="px-4 sm:px-8 mx-auto mt-10">
       <div className="grid lg:grid-cols-[450px_1fr] md:grid-cols-[450px_1fr] grid-cols-1 gap-10">
         <div>
-          <h1 className="font-bold">Why Choose Us</h1>
-          <p>
+          <h1 className="font-bold text-2xl sm:text-3xl mb-4">Why Choose Us</h1>
+          <p className="text-base sm:text-lg mb-6">
             Yes, relying too heavily on an online essay sample can be risky.
             Students may unintentionally mimic the structure or content of a
-            sample without.
+            sample without understanding the underlying concepts.
           </p>
 
           <div className="text-center mt-10">
             <img
               src="https://picsum.photos/500/200"
-              className="mb-5 rounded-lg"
+              className="mb-5 rounded-lg w-full h-auto"
+              alt="support image"
             />
-            <h2 className="font-bold text-3xl pb-3">Need Support?</h2>
-            {/* <p>
-              Feugiat sed lectus vestibulum mattis fusce ut placerat orci
-              ullamcorper velit. Contact Us
-            </p> */}
-            <div className="flex gap-5 justify-center mt-6">
-              <button className="bg-green-500 w-28">
+            <h2 className="font-bold text-xl sm:text-2xl pb-3">
+              Need Support?
+            </h2>
+            <div className="flex gap-4 justify-center mt-6">
+              <button className="bg-green-500 w-28 sm:w-32 py-2 rounded-lg">
                 <div className="flex items-center flex-col">
                   <FaPhoneAlt size={24} className="text-white" />
-                  <p className="ml-2">Call</p>
+                  <p className="text-white">Call</p>
                 </div>
               </button>
-              <button className="bg-orange-500 w-28">
+              <button className="bg-orange-500 w-28 sm:w-32 py-2 rounded-lg">
                 <div className="flex items-center flex-col">
                   <FaEnvelope size={24} className="text-white" />
-                  <p className="ml-2">Message</p>
+                  <p className="text-white">Message</p>
                 </div>
               </button>
             </div>
           </div>
         </div>
         <div>
-          <div className="w-full mx-auto ">
+          <div className="w-full mx-auto">
             {items.map((item, index) => (
               <AccordionItem
                 key={index}

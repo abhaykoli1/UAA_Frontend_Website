@@ -14,6 +14,7 @@ import TermsAndConditions from "./pages/user/terms";
 import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import CheckAuth from "./components/common/check-auth";
+import Hero from "./pages/user/hero";
 
 function App() {
   const sampleData = [
@@ -78,6 +79,7 @@ function App() {
   return (
     <div className="">
       <Routes>
+        <Route path="/h" element={<Hero />} />
         <Route
           path="/login"
           element={

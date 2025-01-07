@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -55,7 +54,7 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       to={link.to}
-                      onClick={() => goTop()}
+                      // onClick={() => goTop()}
                       className="text-gray-400  hover:text-pink-500 duration-500"
                     >
                       {link.name}

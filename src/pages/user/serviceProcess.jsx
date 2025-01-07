@@ -44,8 +44,10 @@ const steps = [
 const ServicesProcess = () => {
   return (
     <div className="bg-black p-6 min-h-screen pt-32 flex flex-col items-center">
-      <h1 className="font-bold text-white mb-20">Services Process</h1>
-      <div className="flex space-x-6 px-10">
+      <h1 className="font-bold text-white mb-20 text-2xl sm:text-3xl lg:text-4xl">
+        Services Process
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-10">
         {steps.map((step) => (
           <div
             key={step.id}
@@ -54,10 +56,12 @@ const ServicesProcess = () => {
             <div className="bg-blue-100 text-blue-600 p-4 rounded-full mb-5">
               {step.icon}
             </div>
-            <h2 className="text-xl font-semibold text-pink-500">
+            <h2 className="text-xl sm:text-2xl font-semibold text-pink-500">
               {step.title}
             </h2>
-            <p className="text-white text-md mt-2">{step.description}</p>
+            <p className="text-white text-sm sm:text-md mt-2">
+              {step.description}
+            </p>
           </div>
         ))}
       </div>

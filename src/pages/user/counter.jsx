@@ -37,7 +37,7 @@ function Counter() {
   }, []);
 
   return (
-    <div className="container mx-auto py-16 text-center text-white">
+    <div className="container mx-auto py-16 text-center text-white px-10">
       <h1 className=" font-bold text-white my-14 "> Our Dynamic Counters</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8">
         {counters.map((counter, index) => (
