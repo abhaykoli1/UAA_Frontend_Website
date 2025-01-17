@@ -9,32 +9,29 @@ const BlogComponent = ({ blog }) => {
   };
 
   return (
-    <div className=" bg-white shadow-lg rounded-lg overflow-hidden mb-8">
-      {/* Image at the top */}
-      <img
-        src={"https://picsum.photos/seed/picsum/200/300"}
-        alt="Blog Post"
-        className="w-ful h-60 w-[500px] object-cover"
-      />
-      {/* Content */}
-      <div className="p-6">
-        {/* Date and Title */}
-        <div className="text-gray-500 text-sm">{blog.blog.cr_date}</div>
-        <h2 className="text-3xl font-semibold text-gray-800 mt-2">
-          {blog.blog.title}
-        </h2>
+    <div className=" bg-white hover:shadow-2xl border duration-500 transition-all hover:scale-[102%] rounded-lg overflow-hidden mb-8">
+      <div className="flex flex-col justify-between h-full">
+        <img
+          src={"https://picsum.photos/seed/picsum/200/300"}
+          alt="Blog Post"
+          className="w-ful h-60 w-[500px] object-cover"
+        />
+        {/* Content */}
+        <div className="p-6">
+          <div className="text-gray-500 text-sm">{blog.blog.cr_date}</div>
+          <h2 className="text-3xl font-semibold text-gray-800 mt-2">
+            {blog.blog.title}
+          </h2>
+          <p className="text-gray-700 mt-4">{blog.blog.shortDec}</p>
+        </div>
 
-        {/* Description */}
-        <p className="text-gray-700 mt-4">{blog.blog.shortDec}</p>
-
-        {/* View Count */}
-        <div className="flex items-center justify-between">
+        <div className="flex h-20   relative items-center justify-between">
           <div className="mt-4 text-gray-600">
             {/* <span className="font-semibold">{views}</span> views */}
           </div>
           <button
             onClick={() => handleBlog(blog.seo_title)}
-            className="mt-6 text-white hover:bg-black bg-blue-600 duration-700 transition-all "
+            className="mt-6 absolute bottom-5 right-6  text-white hover:bg-black bg-blue-600 duration-700 transition-all "
           >
             View More
           </button>

@@ -21,7 +21,7 @@ const UserLayout = () => {
         sidebar={sidebar} // Passes the sidebar state to Sidebar component
         setSidebar={setSidebar} // Passes setSidebar function to Sidebar component
       />
-      <main className="absolute pt-20 overflow-scroll top-20 right-0 left-0">
+      <main className="absolute  top-20 right-0 left-0">
         <Outlet />
         <Footer />
       </main>

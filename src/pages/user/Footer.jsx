@@ -41,7 +41,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="border-t-[0.5px] border-gray-600 bg-slate-900 text-white pt-10">
+    <footer className="border-t-[0.5px] border-gray-600 bg-[#111] text-white pt-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {footerLinks.map((section, index) => (
@@ -66,7 +66,7 @@ function Footer() {
           ))}
         </div>
       </div>
-      <div className="bg-pink-500 py-7 mt-8 text-center text-white text-sm">
+      <div className="bg-indigo-800 py-7 mt-8 text-center text-white text-sm">
         <p>
           &copy; {new Date().getFullYear()} 2021-2024 UAA | Powered by Academic
           Help & E-Counselling

@@ -114,10 +114,7 @@ function App() {
           <Route path="samples" element={<Sample />} />
           <Route path="privacy-Policy" element={<PrivacyPolicy />} />
           <Route path="Terms&Condition" element={<TermsAndConditions />} />
-          <Route
-            path="/sample/:id"
-            element={<PerticularSample data={sampleData} />}
-          />
+          <Route path="sample/:value" element={<PerticularSample />} />
         </Route>
       </Routes>
     </div>

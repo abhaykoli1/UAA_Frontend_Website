@@ -9,7 +9,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Accordion from "../../components/user/accordionComponent";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { getServiceByTitle } from "../../api/apiServices";
 
 const PerticularService = () => {
@@ -33,28 +32,41 @@ const PerticularService = () => {
 
   const { value } = useParams();
   const [service, setService] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const response = await getServiceByTitle(value);
-        console.log("data:", response.data);
         setService(response.data);
       } catch (error) {
+        setError("Failed to load service data.");
         console.error("Error fetching services:", error);
+      } finally {
+        setLoading(false);
       }
-      // console.log("value:", service.description);
     };
     fetchServices();
-  }, []);
+  }, [value]);
+
+  if (loading)
+    return <p className="text-center text-white">Loading service data...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (!service)
+    return <p className="text-center text-white">No service data found.</p>;
 
   return (
     <section className="bg-black text-bla py-10">
-      <div className=" mx-auto w-full px-10">
+      <div className="mx-auto w-full px-10">
         <div className="row">
           <div className="col-md-12 mt-3">
             <div className="text-center shadow bg-white h-[500px] rounded-lg p-4">
-              <img src={logo} className="h-auto  mx-auto" />
+              <img
+                src={service.bannerImg || logo}
+                alt={service.title}
+                className="h-auto mx-auto"
+              />
             </div>
             <ul className="flex justify-center mt-3 space-x-8">
               <li className="flex items-center space-x-2 text-gray-400">
@@ -78,24 +90,20 @@ const PerticularService = () => {
             </ul>
           </div>
         </div>
-        <div className="grid lg:grid-cols-[1fr_600px] md:grid-cols-2 grid-cols-1 gap-10 ">
-          {/* Left Section */}
-
+        <div className="grid lg:grid-cols-[1fr_600px] md:grid-cols-2 grid-cols-1 gap-10">
           <div className="left">
             <h3 className="font-bold text-xl text-white">{service.title}</h3>
             <p>{service.description}</p>
-            {/*  */}
             <ButtonComponent btnText={"Book Now"} />
             <button className="btn btn-success bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">
               Click on Whatsapp
             </button>
-            <div className="container mx-auto ">
+            <div className="container mx-auto">
               <h1 className="text-center font-bold text-2xl my-6">FAQ's</h1>
               <Accordion items={accordionItems} />
             </div>
           </div>
 
-          {/* Right Section */}
           <div className="righ">
             <div>
               <div className="text-center mt-5">
@@ -107,7 +115,7 @@ const PerticularService = () => {
                 </p>
               </div>
 
-              <div className="bg-transparent sticky top-0 right px-6 py-6 mt-4 rounded-lg shadow-md border border-pink-400">
+              <div className="bg-transparent sticky top-0 px-6 py-6 mt-4 rounded-lg shadow-md border border-pink-400">
                 <h5 className="text-center font-semibold text-xl mb-7">
                   Fill your details & get your counselling done.
                 </h5>
@@ -159,7 +167,7 @@ const PerticularService = () => {
                   <div className="mb-4">
                     <input
                       type="file"
-                      className="block w-full text-gray-400 file:duration-500 file:mr-4 file:py-2  file:px-4 file:rounded-lg file:cursor-pointer transition-all file:border-pink file:bg-blue-100 file:text-sm file:font-medium file:border-[0.5px]  file:text-black file:border-white file:hover:bg-gray-900  file:hover:text-white "
+                      className="block w-full text-gray-400 file:duration-500 file:mr-4 file:py-2  file:px-4 file:rounded-lg file:cursor-pointer transition-all file:border-pink file:bg-blue-100 file:text-sm file:font-medium file:border-[0.5px]  file:text-black file:border-white file:hover:bg-gray-900  file:hover:text-white"
                       multiple
                     />
                   </div>
@@ -173,9 +181,8 @@ const PerticularService = () => {
               <label className="text-md font-bold text-slate-800">
                 Share :
               </label>
-              <div className="flex gap-4 py-3 ">
-                <div className="flex gap-5 py- justify-center">
-                  {/* Facebook */}
+              <div className="flex gap-4 py-3">
+                <div className="flex gap-5 justify-center">
                   <a
                     href="https://facebook.com"
                     target="_blank"
@@ -185,7 +192,6 @@ const PerticularService = () => {
                     <FontAwesomeIcon icon={faFacebookF} />
                   </a>
 
-                  {/* Twitter */}
                   <a
                     href="https://twitter.com"
                     target="_blank"
@@ -195,7 +201,6 @@ const PerticularService = () => {
                     <FontAwesomeIcon icon={faTwitter} />
                   </a>
 
-                  {/* LinkedIn */}
                   <a
                     href="https://linkedin.com"
                     target="_blank"

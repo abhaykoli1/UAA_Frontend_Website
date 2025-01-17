@@ -15,7 +15,7 @@ const Header = ({ sidebar, toggleSidebar }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   return (
-    <div className="h-20 sticky top-0 bg-[#111] text-white flex justify-between items-center">
+    <div className="h-20 shadow-xl sticky top-0 bg-white text-black flex justify-between items-center">
       <div className="w-full px-12 mx-auto flex justify-between items-center">
         <div className="flex items-center justify-between w-full">
           <div>
@@ -28,8 +28,8 @@ const Header = ({ sidebar, toggleSidebar }) => {
                   key={index}
                   to={link.path}
                   className={({ isActive }) =>
-                    `hover:underline hover:text-white font-bold ${
-                      isActive ? "text-pink-500" : "text-white"
+                    `hover:underline hover:text-black font-bold ${
+                      isActive ? "text-pink-500" : "text-black"
                     }`
                   }
                 >
@@ -41,13 +41,13 @@ const Header = ({ sidebar, toggleSidebar }) => {
               <nav className="flex gap-5">
                 <a
                   href="/login"
-                  className="px-2 py-1.5 text-white font-bold hover:text-pink-500 duration-500"
+                  className="px-2 py-1.5 text-black font-bold hover:text-pink-500 duration-500"
                 >
                   Log In
                 </a>
                 <a
                   href="/register"
-                  className="border font-bold hover:border-white px-2 py-1.5 bg-pink-600 border-pink-600 text-white rounded-md hover:bg-white hover:text-pink-600 duration-700 transition outline-none"
+                  className="border font-bold hover:border-white px-2 py-1.5 bg-pink-600 border-pink-600 text-white rounded-md hover:bg-black hover:text-white cursor-pointer duration-700 transition outline-none"
                 >
                   Sign Up
                 </a>
@@ -56,9 +56,9 @@ const Header = ({ sidebar, toggleSidebar }) => {
               <a
                 onClick={() => {
                   localStorage.setItem("isLoggedIn", "false");
-                  navigate("/login");
+                  navigate("/");
                 }}
-                className="border font-bold hover:border-white px-2 py-1.5 bg-pink-600 border-pink-600 text-white rounded-md hover:bg-white hover:text-pink-600 duration-700 transition outline-none"
+                className="border font-bold hover:border-white px-2 py-1.5 bg-pink-600 border-pink-600 text-white rounded-md hover:bg-black hover:text-white cursor-pointer duration-700 transition outline-none"
               >
                 Log Out
               </a>
@@ -67,22 +67,22 @@ const Header = ({ sidebar, toggleSidebar }) => {
           <div className="md:hidden fixed top-6 right-4 z-50  hover:border-none focus:outline-none bg-transparent focus:border-none">
             <button
               onClick={toggleSidebar}
-              className="relative h-8 focus:outline-none hover:border-none bg-transparent focus:border-none"
+              className="relative h-8 text-black focus:outline-none hover:border-none bg-transparent focus:border-none"
             >
               <div
-                className={`absolute  left-0  h-[5px] w-8 bg-white rounded  transform transition-transform duration-300 ${
+                className={`absolute left-0 bg-black  h-[5px] w-8  rounded  transform transition-transform duration-300 ${
                   sidebar
                     ? "rotate-45 translate-y-0 top-1/2"
                     : "-translate-y-2 top-3"
                 }`}
               />
               <div
-                className={`absolute top-1/2 left-0 w-8 h-[5px] bg-white rounded  transform transition-opacity duration-300 ${
+                className={`absolute top-1/2 left-0 w-8 h-[5px] bg-black rounded  transform transition-opacity duration-300 ${
                   sidebar ? "opacity-0 " : "opacity-100"
                 }`}
               />
               <div
-                className={`absolute  left-0 w-8 h-[5px] bg-white rounded  transform transition-transform duration-300 ${
+                className={`absolute  left-0 w-8 h-[5px] bg-black rounded  transform transition-transform duration-300 ${
                   sidebar
                     ? "-rotate-45 translate-y-0 top-1/2"
                     : "translate-y-2 top-[18px]"
@@ -90,7 +90,6 @@ const Header = ({ sidebar, toggleSidebar }) => {
               />
             </button>
           </div>
-          {/* <HamburgerIcon /> */}
         </div>
       </div>
     </div>

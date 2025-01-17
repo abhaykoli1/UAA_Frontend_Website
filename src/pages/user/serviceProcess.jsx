@@ -11,7 +11,7 @@ const steps = [
   {
     id: 1,
     icon: <FaUserGraduate size={50} />,
-    title: "Try UAA Expert Study Abroad Counseling Services!",
+    title: "UAA Abroad Counseling!",
     description:
       "Experience professional guidance for your study abroad plans.",
   },
@@ -43,15 +43,15 @@ const steps = [
 
 const ServicesProcess = () => {
   return (
-    <div className="bg-black p-6 min-h-screen pt-32 flex flex-col items-center">
-      <h1 className="font-bold text-white mb-20 text-2xl sm:text-3xl lg:text-4xl">
-        Services Process
+    <div className=" p-6 min-h-screen pt-32 flex flex-col items-center">
+      <h1 className="font-bold  mb-20 text-2xl sm:text-3xl lg:text-4xl">
+        Process
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 lg:px-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 px-4 sm:px-8 lg:px-10">
         {steps.map((step) => (
           <div
             key={step.id}
-            className="shadow-md rounded-lg p-6 flex flex-col items-center text-center"
+            className="hover:shadow-2xl hover:scale-[104%] duration-500 transition-all cursor-pointer rounded-lg p-6 flex flex-col items-center text-center"
           >
             <div className="bg-blue-100 text-blue-600 p-4 rounded-full mb-5">
               {step.icon}
@@ -59,9 +59,7 @@ const ServicesProcess = () => {
             <h2 className="text-xl sm:text-2xl font-semibold text-pink-500">
               {step.title}
             </h2>
-            <p className="text-white text-sm sm:text-md mt-2">
-              {step.description}
-            </p>
+            <p className=" text-sm sm:text-md mt-2">{step.description}</p>
           </div>
         ))}
       </div>

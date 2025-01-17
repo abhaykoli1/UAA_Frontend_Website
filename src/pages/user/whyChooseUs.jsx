@@ -1,16 +1,44 @@
 import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa"; // FaPhoneAlt for call, FaEnvelope for message (email)
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+
+import { useRef, useEffect } from "react";
 
 const AccordionItem = ({ title, children, isOpen, onToggle }) => {
+  const [height, setHeight] = useState("0px");
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setHeight("0px");
+    }
+  }, [isOpen]);
+
   return (
     <div className="border-b bg-white text-black rounded-md mb-3">
       <div
-        className="p-4 cursor-pointer border-b rounded-md"
+        className="p-4 font-bold text-lg cursor-pointer border-b rounded-md flex items-center justify-between"
         onClick={onToggle}
       >
         <h3>{title}</h3>
+        <span>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</span>
       </div>
-      {isOpen && <div className="p-4">{children}</div>}
+      <div
+        ref={contentRef}
+        style={{
+          maxHeight: height,
+          overflow: "hidden",
+          transition: "max-height 0.4s ease-out",
+        }}
+        className={`px-4 transition-all duration-500 ${
+          isOpen ? "py-3" : "py-0"
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 };
@@ -59,9 +87,10 @@ const WhyChooseUS = ({ items }) => {
           </div>
         </div>
         <div>
-          <div className="w-full mx-auto">
+          <div className="w-full mx-auto shadow-xl">
             {items.map((item, index) => (
               <AccordionItem
+                className="font-bold"
                 key={index}
                 title={item.title}
                 isOpen={index === openIndex}

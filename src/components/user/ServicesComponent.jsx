@@ -15,20 +15,12 @@ const ServicesComponent = ({ item }) => {
   return (
     <div
       id="Services"
-      className=" w-full text-black"
+      className=" w-full hover:shadow-2xl border hover:scale-105  rounded-2xl  bg-white transition duration-300"
       onClick={() => handleService(item.seo_title)}
     >
-      <div
-        key={item.service.id}
-        className="flex items-center p-10 bg-white hover:scale-105 shadow-lg rounded-2xl hover:shadow-xl transition duration-300"
-      >
+      <div key={item.service.id} className="flex items-center p-10">
         <div>
-          <img
-            src={web}
-            // src={item.service.icon}
-            alt={item.service.title}
-            className="w-16 h-16"
-          />
+          <img src={web} alt={item.service.title} className="w-16 h-16" />
           <div className="mt-10 ">
             <h3 className="text-3xl font-bold text-gray-800">
               {item.service.title}

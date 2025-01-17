@@ -1,63 +1,163 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    country_code: "+91",
+    phone: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8080/api/v1/add-contact-query",
+        {
+          name: formData.name,
+          phone: formData.phone,
+          country_code: formData.country_code,
+          email: formData.email,
+          message: formData.message,
+        }
+      );
+      alert(response.data.message);
+      setFormData({
+        name: "",
+        country_code: "+91",
+        phone: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error submitting contact query:", error);
+      alert("Failed to submit contact query.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="px-10 mx-auto py-20 text-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="py-3 rounded shadow-lg text-white">
-          <h1 className=" font-bold text-pink-500 mb-4 ">Reach Us</h1>
-          <p className="text-lg mb-6">
-            Reach out to our team for any queries or assistance with our IT
-            services. We’re here to support your needs with our reliable and
-            professional solutions.
+    <div id="Contact" className="mx-auto pt-32 pb-16 px-4 ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+        <div className="p-8 rounded-lg w-full">
+          <h1 className="text-4xl font-bold text-pink-500 mb-6">
+            Send Us a Message
+          </h1>
+          <p className="text-lg text-black mb-4">
+            We’d love to hear from you! Whether you have questions about our IT
+            services, need technical support, or are simply exploring how we can
+            help transform your business with reliable tech solutions, feel free
+            to get in touch with us anytime. Our dedicated team is always ready
+            to assist you.
           </p>
-          <p className="mb-2 text-lg">
-            <strong>Office Address:</strong> 1234 Tech Lane, Innovation City,
-            56789
-          </p>
-          <p className="mb-2 text-lg">
-            <strong>Email:</strong> gmail.com
-          </p>
-          <p className="mb-2 text-lg">
-            <strong>Phone:</strong> +91
-          </p>
+          <div className="space-y-4">
+            <p className="text-[18px]">
+              <strong className="text-pink-500">Office Address:</strong> Manbagh
+              Jaisinghpura Khor, Jaipur, Rajasthan 302027
+            </p>
+            <p className="text-[18px]">
+              <strong className="text-pink-500">Email:</strong>{" "}
+              <a
+                href="mailto:info@avbigbuddy.site"
+                className="hover:underline text-black"
+              >
+                info@avbigbuddy.site
+              </a>
+            </p>
+            <p className="text-[18px]">
+              <strong className="text-pink-500">Phone:</strong> +91 9509961818
+            </p>
+          </div>
         </div>
-        <div>
-          <form className=" border-[.5px] border-gray-500 p-5 bg-white text-black rounded-md shadow-lg ">
-            <input
-              placeholder="Name"
-              type="text"
-              className="w-full p-2 mb-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
-            />
-            <div className="flex items-center mb-4">
-              <select className="p-2 mr-2  rounded outline-none bg-transparent border-b-[.5px] border-gray-500">
-                <option value="+1">+1 (US)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+91">+91 (India)</option>
-                <option value="+61">+61 (Australia)</option>
-              </select>
+
+        {/* Contact Form Section */}
+        <div className="p-8 rounded-lg w-full  text-black">
+          <h1 className="text-4xl font-bold text-pink-500 mb-6">
+            We are here to <span className="text-black">assist</span> you!
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
               <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
                 type="text"
-                placeholder="Phone Number"
-                className="w-full p-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
+                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                required
               />
             </div>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full p-2 mb-2 rounded outline-none bg-transparent border-b-[.5px] border-gray-500"
-            />
 
-            <textarea
-              placeholder="Message"
-              className="w-full p-2 mb-4 rounded text-black outline-none bg-transparent border-b-[.5px] border-gray-500"
-            ></textarea>
+            <div>
+              <div className="flex items-center space-x-2">
+                <select
+                  name="country_code"
+                  value={formData.country_code}
+                  onChange={handleChange}
+                  className="p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                >
+                  <option value="+91">+91 (India)</option>
+                  <option value="+1">+1 (US)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+61">+61 (Australia)</option>
+                </select>
+                <input
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Phone Number"
+                  className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                type="email"
+                placeholder="Your Email"
+                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                required
+              />
+            </div>
+
+            <div>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your Message"
+                rows="4"
+                className="w-full text-black p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                required
+              ></textarea>
+            </div>
 
             <button
               type="submit"
-              className="w-full border-none rounded bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 "
+              className="w-full p-3 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-semibold"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Submitting..." : "Send Message"}
             </button>
           </form>
         </div>

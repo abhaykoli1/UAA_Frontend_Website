@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { getSampleByTitle } from "../../api/apiSample";
 
-const PerticularSample = ({ data }) => {
-  const { id } = useParams(); // Get the sample ID from the URL
+const PerticularSample = () => {
+  const { value } = useParams();
+  const [sampleData, setSampleData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const sampleData = data.find((item) => item.id === parseInt(id)) || {
-    moduleName: "Sample Not Found",
-    addOnDate: "",
-    stats: [],
-    leftSection: {},
-    rightSection: {},
-    footer: {},
-  };
+  console.log("Title from URL:", value);
+
+  useEffect(() => {
+    const fetchSample = async () => {
+      try {
+        const response = await getSampleByTitle(value);
+        setSampleData(response.data); // Extracting 'data' from API response
+      } catch (err) {
+        setError("Failed to load sample data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSample();
+  }, [value]);
+
+  if (loading) return <p>Loading sample data...</p>;
+  if (error) return <p>{error}</p>;
+  if (!sampleData) return <p>No sample data available</p>;
 
   return (
     <div className="p-5 container mx-auto">
@@ -19,69 +35,37 @@ const PerticularSample = ({ data }) => {
         {sampleData.moduleName}
       </h1>
       <h4 className="text-secondary text-gray-500 mb-5 text-center">
-        Add on - {sampleData.addOnDate}
+        Pages: {sampleData.pageCount} | Word Count: {sampleData.wordcount}
       </h4>
+      <div className="mb-5">
+        <img
+          src={sampleData.file}
+          alt={sampleData.moduleName}
+          className="w-full max-w-md mx-auto mb-4"
+        />
+        <p className="text-gray-600 text-justify">{sampleData.description}</p>
+      </div>
 
-      {/* Stats Section */}
       <div className="flex flex-wrap justify-around mb-8">
-        {sampleData.stats.map((stat, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center px-4 py-2 border-b sm:border-r sm:border-b-0 last:sm:border-none border-gray-300 w-1/2 sm:w-auto"
-          >
-            <p className="text-lg font-bold">{stat.value}</p>
-            <p className="text-gray-600">{stat.label}</p>
+        {sampleData.fileimages.map((image, index) => (
+          <div key={index} className="p-2">
+            <img
+              src={image}
+              alt={`File Image ${index + 1}`}
+              className="max-w-[150px] mx-auto"
+            />
           </div>
         ))}
       </div>
 
-      {/* Content Section */}
-      <div className="border border-blue-500 flex flex-col sm:flex-row h-auto sm:h-[400px]">
-        {/* Left Section */}
-        <div className="flex-1 flex flex-col items-center justify-center p-4">
-          <h1 className="text-2xl font-bold mb-4 text-center">
-            {sampleData.leftSection.title}
-          </h1>
-          <p className="text-gray-600 mb-4 text-center">
-            {sampleData.leftSection.subtitle}
-          </p>
-          <img
-            src={
-              sampleData.leftSection.imageUrl ||
-              "https://via.placeholder.com/150"
-            }
-            alt="Preview"
-            className="max-w-[150px] mx-auto"
-          />
-        </div>
-
-        {/* Right Section */}
-        <div className="flex-1 flex flex-col items-center justify-center bg-gray-50 p-4">
-          <p className="text-gray-600 mb-4 text-center">
-            {sampleData.rightSection.text1}
-          </p>
-          <p className="text-gray-600 mb-4 text-center">
-            {sampleData.rightSection.text2}
-          </p>
-          <button className="bg-red-500 text-white rounded-lg py-2 px-4 mb-3 hover:bg-red-600">
-            {sampleData.rightSection.button1}
-          </button>
-          <button className="bg-blue-500 text-white rounded-lg py-2 px-4 hover:bg-blue-600">
-            {sampleData.rightSection.button2}
-          </button>
-        </div>
-      </div>
-
-      {/* Footer Section */}
       <div className="mt-8">
-        <h3 className="text-xl font-bold mb-4 text-center">
-          {sampleData.footer.title}
-        </h3>
-        {sampleData.footer.paragraphs.map((paragraph, index) => (
-          <p key={index} className="text-white mb-4 text-justify px-4 sm:px-0">
-            {paragraph}
-          </p>
-        ))}
+        <h3 className="text-xl font-bold mb-4 text-center">SEO Information</h3>
+        <p className="text-gray-600 mb-2">
+          <strong>Title:</strong> {sampleData.seo_title}
+        </p>
+        <p className="text-gray-600">
+          <strong>Description:</strong> {sampleData.seo_description}
+        </p>
       </div>
     </div>
   );

@@ -37,13 +37,13 @@ function Counter() {
   }, []);
 
   return (
-    <div className="container mx-auto py-16 text-center text-white px-10">
-      <h1 className=" font-bold text-white my-14 "> Our Dynamic Counters</h1>
+    <div className="container mx-auto py-16 text-center px-10">
+      {/* <h1 className=" font-bold  my-14 "> Our Dynamic Counters</h1> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8">
         {counters.map((counter, index) => (
           <motion.div
             key={index}
-            className="p-8  border-[0.5px] border-gray-500  rounded-full"
+            className="p-8 cursor-pointer hover:scale-105 duration-500 transtion-all  border-[0.5px] border-gray-500  rounded-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
