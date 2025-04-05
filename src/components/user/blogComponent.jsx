@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
 const BlogComponent = ({ blog }) => {
@@ -8,33 +9,55 @@ const BlogComponent = ({ blog }) => {
     console.log("SEO Title:", seoTitle);
   };
 
+  console.log(blog.seo_title);
+
+  function goTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
   return (
-    <div className=" bg-white hover:shadow-2xl border duration-500 transition-all hover:scale-[102%] rounded-lg overflow-hidden mb-8">
-      <div className="flex flex-col justify-between h-full">
+    <div className=" bg-white hover:shadow-2xl  border duration-500 transition-all hover:scale-[102%] rounded-lg overflow-hidden mb-8">
+      <div className="flex flex-col justify-between h-full ">
         <img
-          src={"https://picsum.photos/seed/picsum/200/300"}
+          src={blog.blog.bannerImg}
           alt="Blog Post"
-          className="w-ful h-60 w-[500px] object-cover"
+          className="w-ful h-60 w-[500px] object-cover border-b"
         />
         {/* Content */}
-        <div className="p-6">
-          <div className="text-gray-500 text-sm">{blog.blog.cr_date}</div>
-          <h2 className="text-3xl font-semibold text-gray-800 mt-2">
-            {blog.blog.title}
-          </h2>
-          <p className="text-gray-700 mt-4">{blog.blog.shortDec}</p>
-        </div>
-
-        <div className="flex h-20   relative items-center justify-between">
-          <div className="mt-4 text-gray-600">
-            {/* <span className="font-semibold">{views}</span> views */}
+        <div className="flex justify-between  flex-col h-[100%] ">
+          <div className="px-6 py-4 ">
+            <h2 className="text-2xl font-semibold text-gray-800 ">
+              {blog.blog.title}
+            </h2>
+            <p
+              className="text-gray-700 mt-2"
+              // style={{
+              //   display: "-webkit-box",
+              //   WebkitLineClamp: 5,
+              //   WebkitBoxOrient: "vertical",
+              //   overflow: "hidden",
+              // }}
+            >
+              {blog.blog.shortDec}
+            </p>
           </div>
-          <button
-            onClick={() => handleBlog(blog.seo_title)}
-            className="mt-6 absolute bottom-5 right-6  text-white hover:bg-black bg-blue-600 duration-700 transition-all "
-          >
-            View More
-          </button>
+          {/* Footer */}
+          <div className="flex h-20  px-6 bg-main/10 relative items-center justify-between">
+            <div>
+              <div className="text-gray-500 text-sm">{blog.blog.cr_date}</div>
+              <button
+                onClick={() => {
+                  goTop();
+                  handleBlog(blog.seo_title);
+                }}
+                className="mt-6 absolute bottom-5 right-6  text-white hover:bg-black bg-main duration-700 transition-all "
+              >
+                View More
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

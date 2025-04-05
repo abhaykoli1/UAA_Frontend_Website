@@ -1,13 +1,12 @@
 import axios from "axios";
-
-const API_BASE_URL = "http://127.0.0.1:8080/api/v1";
+import config from "./config";
 
 // Add a home query
 export const addHomeQuery = async (queryData, setLoading = null) => {
   try {
-    if (setLoading) setLoading(true); // Set loading if function is provided
+    if (setLoading) setLoading(true);
     const response = await axios.post(
-      `${API_BASE_URL}/add-home-query`,
+      `${config.API_BASE_URL}/add-home-query`,
       queryData
     );
     return response.data;
@@ -26,7 +25,7 @@ export const addHomeQuery = async (queryData, setLoading = null) => {
 export const getAllHomeQueries = async (setLoading = null) => {
   try {
     if (setLoading) setLoading(true);
-    const response = await axios.get(`${API_BASE_URL}/get-all-queries`);
+    const response = await axios.get(`${config.API_BASE_URL}/get-all-queries`);
     return response.data;
   } catch (error) {
     console.error("Error fetching all home queries:", error);

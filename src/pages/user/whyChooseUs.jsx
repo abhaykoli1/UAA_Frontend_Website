@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa"; // FaPhoneAlt for call, FaEnvelope for message (email)
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import { useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AccordionItem = ({ title, children, isOpen, onToggle }) => {
   const [height, setHeight] = useState("0px");
@@ -51,7 +53,7 @@ const WhyChooseUS = ({ items }) => {
   };
 
   return (
-    <section className="px-4 sm:px-8 mx-auto mt-10">
+    <section className="lg:container px-4 sm:px-8 lg:px-5  mx-auto  ">
       <div className="grid lg:grid-cols-[450px_1fr] md:grid-cols-[450px_1fr] grid-cols-1 gap-10">
         <div>
           <h1 className="font-bold text-2xl sm:text-3xl mb-4">Why Choose Us</h1>
@@ -70,18 +72,39 @@ const WhyChooseUS = ({ items }) => {
             <h2 className="font-bold text-xl sm:text-2xl pb-3">
               Need Support?
             </h2>
+
             <div className="flex gap-4 justify-center mt-6">
-              <button className="bg-green-500 w-28 sm:w-32 py-2 rounded-lg">
-                <div className="flex items-center flex-col">
-                  <FaPhoneAlt size={24} className="text-white" />
+              <button className="bg-green-500 w-28 sm:w-32 py-2 rounded-lg hover:scale-[102%] transition-all duration-300">
+                <a
+                  href={`tel:${7597981703}`}
+                  title="Contact Number"
+                  className="flex items-center flex-col "
+                >
+                  {/* <div className="flex items-center flex-col "> */}
+                  <FontAwesomeIcon
+                    className="text-white h-6 w-6"
+                    icon={faPhone}
+                    // shake
+                  />
                   <p className="text-white">Call</p>
-                </div>
+                </a>
+                {/* </div> */}
               </button>
-              <button className="bg-orange-500 w-28 sm:w-32 py-2 rounded-lg">
-                <div className="flex items-center flex-col">
-                  <FaEnvelope size={24} className="text-white" />
+              <button className="bg-orange-500 w-28 sm:w-32 py-2 rounded-lg hover:scale-[102%] transition-all duration-300">
+                <a
+                  href={
+                    "http://api.whatsapp.com/send/?phone=7597981703&text&type=phone_number&app_absent=0"
+                  }
+                  // href="mailto:uniassignassets@gmail.com"
+                  className="flex items-center flex-col"
+                >
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    // flip
+                    className="text-white h-6 w-6"
+                  />
                   <p className="text-white">Message</p>
-                </div>
+                </a>
               </button>
             </div>
           </div>

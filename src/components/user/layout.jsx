@@ -5,11 +5,10 @@ import Footer from "../../pages/user/Footer";
 import Sidebar from "./sidebar";
 
 const UserLayout = () => {
-  const [sidebar, setSidebar] = useState(false); // Sidebar state
+  const [sidebar, setSidebar] = useState(false);
 
-  // Toggle the sidebar
   const toggleSidebar = () => {
-    setSidebar(!sidebar); // This will toggle the sidebar visibility
+    setSidebar(!sidebar);
   };
 
   return (
@@ -17,10 +16,7 @@ const UserLayout = () => {
       <div className="fixed top-0 w-full right-0 bg-transparent z-50">
         <Header sidebar={sidebar} toggleSidebar={toggleSidebar} />
       </div>
-      <Sidebar
-        sidebar={sidebar} // Passes the sidebar state to Sidebar component
-        setSidebar={setSidebar} // Passes setSidebar function to Sidebar component
-      />
+      <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
       <main className="absolute  top-20 right-0 left-0">
         <Outlet />
         <Footer />

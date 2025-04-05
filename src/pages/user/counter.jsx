@@ -4,52 +4,54 @@ import { motion } from "framer-motion";
 function Counter() {
   const [counts, setCounts] = useState([0, 0, 0, 0]);
 
-  // Array of counters' target values and titles
   const counters = [
-    { target: 1000, title: "Counter 1" },
-    { target: 1500, title: "Counter 2" },
-    { target: 2000, title: "Counter 3" },
-    { target: 2500, title: "Counter 4" },
+    { target: 10560, title: "Project" },
+    { target: 15060, title: "Member" },
+    { target: 22195, title: "Love Us" },
+    { target: 11388, title: "Happy Client" },
   ];
 
-  // Function to animate the counter
   const incrementCounter = (index, target) => {
     let current = 0;
     const interval = setInterval(() => {
       if (current >= target) {
         clearInterval(interval);
       } else {
-        current += Math.ceil(target / 100); // Increment smoothly
+        current += Math.ceil(target / 100);
         setCounts((prevCounts) => {
           const newCounts = [...prevCounts];
-          newCounts[index] = current; // Update specific counter
+          newCounts[index] = current;
           return newCounts;
         });
       }
-    }, 20); // Controls the speed of the animation
+    }, 20);
   };
 
   useEffect(() => {
-    // Call incrementCounter for each counter
+    21;
     counters.forEach((counter, index) => {
       incrementCounter(index, counter.target);
     });
   }, []);
 
   return (
-    <div className="container mx-auto py-16 text-center px-10">
-      {/* <h1 className=" font-bold  my-14 "> Our Dynamic Counters</h1> */}
+    <div className="lg:container mx-auto py-16 lg:px-5 px-5 text-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8">
         {counters.map((counter, index) => (
           <motion.div
             key={index}
-            className="p-8 cursor-pointer hover:scale-105 duration-500 transtion-all  border-[0.5px] border-gray-500  rounded-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            className="bg-gradient-to-br from-gray-200/50 via-gray-100/55 to-white hover:from-purple-200/40 hover:via-purple-300/50 hover:to-white shado hover:shadow-xl hover:!scale-[105%] transition-all duration-500 cursor-pointer rounded-lg p-4 flex flex-col items-center text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            whileHover={{ scale: 1.05 }}
           >
-            <h2 className="text-2xl font-semibold mb-4">{counter.title}</h2>
-            <p className="text-4xl font-bold text-pink-500">{counts[index]}</p>
+            <h2 className="text-lg font-semibold mb-4 text-black tracking-wide uppercase">
+              {counter.title}
+            </h2>
+            <p className="text-4xl font-bold text-main drop-shadow-lg">
+              {counts[index]}
+            </p>
           </motion.div>
         ))}
       </div>

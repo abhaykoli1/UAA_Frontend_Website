@@ -3,13 +3,16 @@ import Hero from "./hero";
 import Contact from "./Contact";
 import Counter from "./counter";
 import Page1 from "./page1";
-import WhyChooseUS from "./whyChooseUS";
+
 import BlogComponent from "../../components/user/blogComponent";
 import ServicesComponent from "../../components/user/ServicesComponent";
 import ServicesProcess from "./serviceProcess";
 import { getAllServices } from "../../api/apiServices";
 import { getAllBlogs } from "../../api/apiBlogs";
 import ButtonComponent from "../../components/user/buttonComponent";
+import WhyChooseUS from "./whyChooseUs";
+import ImageCarousel from "./heroPage";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const accordionItems = [
@@ -42,6 +45,11 @@ const Home = () => {
       title: "What types of assignments can you assist with?",
       content:
         "We can assist with a wide range of assignments, including essays, research papers, case studies, lab reports, presentations, and more. Our expertise covers various subjects such as humanities, sciences, business, and technical fields.",
+    },
+    {
+      title: " What if I get failed?",
+      content:
+        "UAA has worked on 95% of passed results so far hence be assured that you will get pass results.However individual performance does matter hence we will surely investigate your issue with our team and get back to you with the best possible solution.",
     },
   ];
 
@@ -77,33 +85,48 @@ const Home = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   console.log(isLoggedIn);
   return (
-    <Fragment className="w-full">
-      <Hero />
+    <section className="w-full">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Uni Academic Assistance</title>
+        <meta name="description" content="sdsjkdbsyub" />
+        <link
+          rel="canonical"
+          href="https://uniacademicassistance.in/services"
+        />
+      </Helmet>
+      {/* <Hero /> */}
+      <ImageCarousel />
       <Page1 />
       <ServicesProcess />
-      <h2 className="text-5xl font-extrabold text-center mb-20">
-        Tailored Solutions for Your Needs
-      </h2>
-      <div className="grid px-10 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-20">
+      <h1 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
+        Tranding Services
+      </h1>
+      <section className="mx-auto lg:container grid lg:px-5  px-5 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-8">
         {services.map((item) => (
           <ServicesComponent item={item} />
         ))}
-      </div>
-      <div className="flex justify-center mt-8 w-full">
-        <button className="text-white w-40 rounded-full hover:scale-105 duration-500 transition-all">
+      </section>
+      <div className="flex justify-center mt-10 w-full ">
+        <a
+          href="/services"
+          className="text-white flex items-center justify-center hover:text-white bg-main w-60 h-16 rounded-full hover:scale-105 duration-500 transition-all"
+        >
           View More
-        </button>{" "}
+        </a>
       </div>
       <Counter />
       <WhyChooseUS items={accordionItems} />
-      <h1 className="text-center mt-12 font-bold">Blogs</h1>
-      <div className="px-10 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-10">
+      <h1 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
+        Blogs & Articles
+      </h1>
+      <section className="mx-auto lg:container px-5 lg:px-5  grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-10">
         {Blogs.map((blog) => (
           <BlogComponent key={blog.id} blog={blog} />
         ))}
-      </div>
+      </section>
       <Contact />
-    </Fragment>
+    </section>
   );
 };
 

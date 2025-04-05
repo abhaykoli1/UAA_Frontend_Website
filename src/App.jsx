@@ -15,6 +15,8 @@ import Login from "./pages/auth/login";
 import Register from "./pages/auth/register";
 import CheckAuth from "./components/common/check-auth";
 import Hero from "./pages/user/hero";
+import ContactUs from "./pages/user/ContactUs";
+import About from "./pages/user/About";
 
 function App() {
   const sampleData = [
@@ -29,7 +31,7 @@ function App() {
         { value: 4535, label: "Downloads" },
       ],
       leftSection: {
-        title: "UAI",
+        title: "UAA",
         subtitle: "You are Reading a preview",
         imageUrl: "",
       },
@@ -40,11 +42,11 @@ function App() {
         button2: "All Projects",
       },
       footer: {
-        title: "UAH : Your Writing Partner",
+        title: "UAA : Your Writing Partner",
         paragraphs: [
-          "“See how AHEC writes in the sample Paper.”",
-          "This sample paper provides a clear format with an introduction, body, and conclusion. At AHEC, we focus on quality without the boring stuff. The framework showcases our dedication. For a personal touch, explore our custom essay writing. Our experts ensure your essays reflect your words and style. Interested in more than just examples? Order custom essays from AHEC. Our authors excel at every project, ensuring your academic success. Ready to simplify your writing journey? AHEC is here to support you! Download our sample paper to grasp our writing style and explore our custom writing services to enhance your academic experience!",
-          "Book your next academic assignment online from the best academic helpers at AHECounselling",
+          "“See how UAA writes in the sample Paper.”",
+          "This sample paper provides a clear format with an introduction, body, and conclusion. At UAA, we focus on quality without the boring stuff. The framework showcases our dedication. For a personal touch, explore our custom essay writing. Our experts ensure your essays reflect your words and style. Interested in more than just examples? Order custom essays from UAA. Our authors excel at every project, ensuring your academic success. Ready to simplify your writing journey? UAA is here to support you! Download our sample paper to grasp our writing style and explore our custom writing services to enhance your academic experience!",
+          "Book your next academic assignment online from the best academic helpers at UAAounselling",
         ],
       },
     },
@@ -70,7 +72,7 @@ function App() {
         button2: "All Projects",
       },
       footer: {
-        title: "UAH : Your Writing Partner",
+        title: "UAA : Your Writing Partner",
         paragraphs: ["Paragraph 1", "Paragraph 2", "Paragraph 3"],
       },
     },
@@ -80,23 +82,23 @@ function App() {
     <div className="">
       <Routes>
         <Route path="/h" element={<Hero />} />
+
         <Route
           path="/login"
           element={
-            <CheckAuth>
-              <Login />
-            </CheckAuth>
+            // <CheckAuth>
+            <Login />
+            // </CheckAuth>
           }
         />
         <Route
           path="/register"
           element={
-            <CheckAuth>
-              <Register />
-            </CheckAuth>
+            // <CheckAuth>
+            <Register />
+            // </CheckAuth>
           }
         />
-
         <Route
           path="/"
           element={
@@ -106,7 +108,9 @@ function App() {
           }
         >
           <Route path="" element={<Home />} />
-          <Route path="contact-Us" element={<Contact />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact-Us" element={<ContactUs />} />
           <Route path="services" element={<Services />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="service/:value" element={<PerticularService />} />

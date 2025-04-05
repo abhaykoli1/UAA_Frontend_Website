@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -35,7 +36,8 @@ function Contact() {
           message: formData.message,
         }
       );
-      alert(response.data.message);
+      toast(response.data.message);
+
       setFormData({
         name: "",
         country_code: "+91",
@@ -45,17 +47,20 @@ function Contact() {
       });
     } catch (error) {
       console.error("Error submitting contact query:", error);
-      alert("Failed to submit contact query.");
+      toast.error("Failed to submit contact query.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div id="Contact" className="mx-auto pt-32 pb-16 px-4 ">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-        <div className="p-8 rounded-lg w-full">
-          <h1 className="text-4xl font-bold text-pink-500 mb-6">
+    <section
+      id="Contact"
+      className="lg:container lg:px-5  mx-auto pt-10 pb-16 px-4 "
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+        <div className=" rounded-lg w-full">
+          <h1 className="text-4xl font-bold text-main mb-6">
             Send Us a Message
           </h1>
           <p className="text-lg text-black mb-4">
@@ -66,28 +71,28 @@ function Contact() {
             to assist you.
           </p>
           <div className="space-y-4">
-            <p className="text-[18px]">
-              <strong className="text-pink-500">Office Address:</strong> Manbagh
+            {/* <p className="text-[18px]">
+              <strong className="text-main">Office Address:</strong> Manbagh
               Jaisinghpura Khor, Jaipur, Rajasthan 302027
-            </p>
+            </p> */}
             <p className="text-[18px]">
-              <strong className="text-pink-500">Email:</strong>{" "}
+              <strong className="text-main">Email:</strong>{" "}
               <a
                 href="mailto:info@avbigbuddy.site"
                 className="hover:underline text-black"
               >
-                info@avbigbuddy.site
+                uniassignassets@gmail.com
               </a>
             </p>
             <p className="text-[18px]">
-              <strong className="text-pink-500">Phone:</strong> +91 9509961818
+              <strong className="text-main">Phone:</strong> +91 7597981703
             </p>
           </div>
         </div>
 
         {/* Contact Form Section */}
-        <div className="p-8 rounded-lg w-full  text-black">
-          <h1 className="text-4xl font-bold text-pink-500 mb-6">
+        <div className=" rounded-lg w-full  text-black">
+          <h1 className="text-4xl font-bold text-main mb-6">
             We are here to <span className="text-black">assist</span> you!
           </h1>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -98,7 +103,7 @@ function Contact() {
                 onChange={handleChange}
                 placeholder="Your Name"
                 type="text"
-                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
                 required
               />
             </div>
@@ -109,7 +114,7 @@ function Contact() {
                   name="country_code"
                   value={formData.country_code}
                   onChange={handleChange}
-                  className="p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                  className="p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
                 >
                   <option value="+91">+91 (India)</option>
                   <option value="+1">+1 (US)</option>
@@ -122,7 +127,7 @@ function Contact() {
                   onChange={handleChange}
                   type="text"
                   placeholder="Phone Number"
-                  className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                  className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
                   required
                 />
               </div>
@@ -135,11 +140,10 @@ function Contact() {
                 onChange={handleChange}
                 type="email"
                 placeholder="Your Email"
-                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
                 required
               />
             </div>
-
             <div>
               <textarea
                 name="message"
@@ -147,14 +151,13 @@ function Contact() {
                 onChange={handleChange}
                 placeholder="Your Message"
                 rows="4"
-                className="w-full text-black p-3 rounded-lg outline-none border border-gray-700 focus:border-pink-500"
+                className="w-full text-black p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
                 required
               ></textarea>
             </div>
-
             <button
               type="submit"
-              className="w-full p-3 rounded-lg bg-pink-500 hover:bg-pink-600 text-white font-semibold"
+              className="w-full p-3 rounded-lg bg-main hover:bg-purple-600 text-white font-semibold"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Send Message"}
@@ -162,7 +165,7 @@ function Contact() {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

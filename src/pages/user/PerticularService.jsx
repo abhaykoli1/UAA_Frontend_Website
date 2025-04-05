@@ -10,33 +10,34 @@ import {
 import Accordion from "../../components/user/accordionComponent";
 import { useParams } from "react-router-dom";
 import { getServiceByTitle } from "../../api/apiServices";
+import { Helmet } from "react-helmet";
 
 const PerticularService = () => {
   const accordionItems = [
     {
       title: "What additional benefits do you provide?",
       content:
-        "Choose AHECounselling for top-notch essay writing. Our service guarantees the best writers, unique content, timely submissions, regular updates, and free edits for a satisfying experience.",
+        "Choose UAA for top-notch essay writing. Our service guarantees the best writers, unique content, timely submissions, regular updates, and free edits for a satisfying experience.",
     },
     {
-      title: "Are AHECounselling essays plagiarism-free?",
+      title: "Are UAA essays plagiarism-free?",
       content:
-        "AHECounselling ensures plagiarism-free papers by expert writers who create content from scratch. We use advanced plagiarism detection, provide a free originality report, and guarantee proper in-text citations and references, ensuring a completely plagiarism-free essay.",
+        "UAA ensures plagiarism-free papers by expert writers who create content from scratch. We use advanced plagiarism detection, provide a free originality report, and guarantee proper in-text citations and references, ensuring a completely plagiarism-free essay.",
     },
     {
-      title: "What makes AHECounselling better than others?",
+      title: "What makes UAA better than others?",
       content:
-        "AHECounselling, serving for over 6 years, offers top-quality paper writing services including essays, research papers, and case studies. Our skilled writers prioritize student satisfaction, backed by free edits. Try our services and experience excellence.",
+        "UAA, serving for over 6 years, offers top-quality paper writing services including essays, research papers, and case studies. Our skilled writers prioritize student satisfaction, backed by free edits. Try our services and experience excellence.",
     },
   ];
 
   const { value } = useParams();
-  const [service, setService] = useState(null);
+  const [service, setService] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchService = async () => {
       try {
         const response = await getServiceByTitle(value);
         setService(response.data);
@@ -47,8 +48,10 @@ const PerticularService = () => {
         setLoading(false);
       }
     };
-    fetchServices();
+    fetchService();
   }, [value]);
+
+  console.log(service[0]);
 
   if (loading)
     return <p className="text-center text-white">Loading service data...</p>;
@@ -57,15 +60,24 @@ const PerticularService = () => {
     return <p className="text-center text-white">No service data found.</p>;
 
   return (
-    <section className="bg-black text-bla py-10">
+    <section className=" text-bla py-10">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{value} | Uni Academic Assistance</title>
+        <meta name="description" content={service[0]?.seo_description} />
+        <link
+          rel="canonical"
+          href={`https://uniacademicassistance.in/blog/${value}`}
+        />
+      </Helmet>
       <div className="mx-auto w-full px-10">
         <div className="row">
           <div className="col-md-12 mt-3">
-            <div className="text-center shadow bg-white h-[500px] rounded-lg p-4">
+            <div className="text-center shadow bg-white h-[50 rounded-lg p-4">
               <img
-                src={service.bannerImg || logo}
-                alt={service.title}
-                className="h-auto mx-auto"
+                src={service[0]?.bannerImg}
+                alt={service[0]?.title}
+                className="max-h-[470px] mx-auto"
               />
             </div>
             <ul className="flex justify-center mt-3 space-x-8">
@@ -90,21 +102,8 @@ const PerticularService = () => {
             </ul>
           </div>
         </div>
-        <div className="grid lg:grid-cols-[1fr_600px] md:grid-cols-2 grid-cols-1 gap-10">
-          <div className="left">
-            <h3 className="font-bold text-xl text-white">{service.title}</h3>
-            <p>{service.description}</p>
-            <ButtonComponent btnText={"Book Now"} />
-            <button className="btn btn-success bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">
-              Click on Whatsapp
-            </button>
-            <div className="container mx-auto">
-              <h1 className="text-center font-bold text-2xl my-6">FAQ's</h1>
-              <Accordion items={accordionItems} />
-            </div>
-          </div>
-
-          <div className="righ">
+        <div className="grid lg:grid-cols-[600px_1fr] md:grid-cols-2 grid-cols-1 gap-10">
+          <div className="">
             <div>
               <div className="text-center mt-5">
                 <p className="font-semibold text-2xl">
@@ -115,52 +114,52 @@ const PerticularService = () => {
                 </p>
               </div>
 
-              <div className="bg-transparent sticky top-0 px-6 py-6 mt-4 rounded-lg shadow-md border border-pink-400">
+              <div className="bg-transparent sticky top-0 px-6 py-6 mt-4 rounded-lg shadow-md border border-purple-600">
                 <h5 className="text-center font-semibold text-xl mb-7">
                   Fill your details & get your counselling done.
                 </h5>
-                <ButtonComponent btnText={"Counselling Help"} />
+                {/* <ButtonComponent btnText={"Counselling Help"} /> */}
 
                 <form className="text-center mt-4">
                   <input
-                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg text-black  border-gray-600 placeholder-gray-400"
                     placeholder="Enter Your name"
                   />
                   <input
-                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg text-black  border-gray-600 placeholder-gray-400"
                     placeholder="Enter Your email"
                   />
                   <div className="flex gap-4 mb-4">
                     <input
                       type="time"
-                      className="py-3 px-4 border rounded-lg w-full bg-gray-900 text-white border-gray-600"
+                      className="py-3 px-4 border rounded-lg w-full text-black  border-gray-600"
                     />
                     <input
                       type="tel"
                       placeholder="Phone No."
-                      className="py-3 px-4 border rounded-lg w-full bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                      className="py-3 px-4 border rounded-lg w-full text-black  border-gray-600 placeholder-gray-400"
                     />
                   </div>
                   <input
-                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg text-black  border-gray-600 placeholder-gray-400"
                     placeholder="Your subject / Course code"
                   />
                   <div className="flex gap-4 mb-4">
                     <input
                       type="time"
-                      className="py-3 px-4 border rounded-lg w-full bg-gray-900 text-white border-gray-600"
+                      className="py-3 px-4 border rounded-lg w-full text-black  border-gray-600"
                     />
                     <input
                       type="date"
-                      className="py-3 px-4 border rounded-lg w-full bg-gray-900 text-white border-gray-600"
+                      className="py-3 px-4 border rounded-lg w-full text-black  border-gray-600"
                     />
                   </div>
                   <input
-                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg text-black  border-gray-600 placeholder-gray-400"
                     placeholder="No. of pages / words"
                   />
                   <textarea
-                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg bg-gray-900 text-white border-gray-600 placeholder-gray-400"
+                    className="block w-full py-3 px-4 text-lg mb-4 border rounded-lg text-black  border-gray-600 placeholder-gray-400"
                     placeholder="Enter Counselling Subject"
                   ></textarea>
 
@@ -171,8 +170,8 @@ const PerticularService = () => {
                       multiple
                     />
                   </div>
-                  <button className="bg-indigo-600 w-full mr-4 sm:mr-5 hover:bg-indigo-700 text-white font-semibold transition duration-500 py-2 px-4 sm:px-6 rounded mb-4 sm:mb-0">
-                    Book
+                  <button className="bg-purple-600 w-full mr-4 sm:mr-5 hover:bg-purple-700 text-white font-semibold transition duration-500 py-2 px-4 sm:px-6 rounded mb-4 sm:mb-0">
+                    Book Now
                   </button>
                 </form>
               </div>
@@ -211,6 +210,20 @@ const PerticularService = () => {
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="left">
+            <h3 className="font-bold text-xl text-black">
+              {service[0]?.title}
+            </h3>
+            <p>{service[0]?.description}</p>
+            {/* <ButtonComponent btnText={"Book Now"} /> */}
+            <button className="btn btn-success mt-6 bg-green-500 text-white w-full py-2 rounded hover:bg-green-600">
+              Click on Whatsapp
+            </button>
+            <div className="container mx-auto">
+              <h1 className="text-center font-bold text-2xl my-6">FAQ's</h1>
+              <Accordion items={accordionItems} />
             </div>
           </div>
         </div>

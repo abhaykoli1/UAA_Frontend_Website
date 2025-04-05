@@ -3,7 +3,7 @@ import { loginUser } from "../../api/apiAuth";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import sm from "../../assets/sm.png";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -58,8 +58,8 @@ const Login = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex">
       <div className="grid grid-cols-[450px_1fr]">
-        <div className="bg-black shadow-md p-10 w-full flex flex-col  justify-center">
-          <h1 className="text-2xl font-bold text-pink-500 text-center mb-6">
+        <div className="bg-white shadow-md p-10 w-full flex flex-col  justify-center">
+          <h1 className="text-2xl font-bold text-purple-600 text-center mb-6">
             LOGIN
           </h1>
           {errorMessage && (
@@ -72,18 +72,15 @@ const Login = () => {
           )}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-white font-medium mb-2"
-              >
-                Email
+              <label htmlFor="email" className="block text-black font-medium ">
+                Email :
               </label>
               <input
                 type="email"
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-4 py-2 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="Enter your email"
                 required
               />
@@ -91,45 +88,48 @@ const Login = () => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-white font-medium mb-2"
+                className="block text-black font-medium "
               >
-                Password
+                Password :
               </label>
               <input
                 type="password"
                 id="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full px-4 py-2 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="Enter your password"
                 required
               />
             </div>
             <div className="flex items-center justify-between mb-4">
-              <a href="#" className="text-sm text-pink-500 hover:underline">
+              <a href="#" className="text-sm text-purple-600 hover:underline">
                 Forgot Password?
               </a>
             </div>
             <button
               type="submit"
-              className="w-full bg-pink-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-600 transition"
+              className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700 transition"
             >
               Login
             </button>
           </form>
           <div className="text-center mt-4">
-            <p className="text-white text-sm">
+            <p className="text-black text-sm">
               Don't have an account?
               <a
                 href="/register"
-                className="text-pink-500 hover:underline ml-1"
+                className="text-purple-600 hover:underline ml-1"
               >
                 Register here
               </a>
             </p>
           </div>
         </div>
-        <div className="flex bg-white w-[100%]"></div>
+        <div className="flex bg-white w-[100%]">
+          {" "}
+          <img src={sm} className="object-cover" />
+        </div>
       </div>
       <ToastContainer />
     </div>
