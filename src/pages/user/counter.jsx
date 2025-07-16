@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import config from "../../../../UAA_Admin_Panel/src/config";
 import axios from "axios";
+import config from "../../api/config";
 
 function Counter() {
   const [counts, setCounts] = useState([0, 0, 0, 0]);
