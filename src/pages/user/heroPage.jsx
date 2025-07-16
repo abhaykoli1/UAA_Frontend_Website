@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import config from "../../../../UAA_Admin_Panel/src/config";
+import config from "../../api/config";
 
 function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
