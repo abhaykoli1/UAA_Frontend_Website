@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+
 import axios from "axios";
 import config from "../../api/config";
 
@@ -11,7 +12,9 @@ function Counter() {
 
   const fetchCounters = async () => {
     try {
-      const response = await axios.get(`${config.API_URL}/get-all-counters`);
+      const response = await axios.get(
+        `${config.API_BASE_URL}/get-all-counters`
+      );
       setCounters(response.data.data);
     } catch (error) {
       console.error("Error fetching counters:", error);

@@ -9,7 +9,7 @@ function ImageCarousel() {
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
-        const res = await axios.get(`${config.API_URL}/heroes`);
+        const res = await axios.get(`${config.API_BASE_URL}/heroes`);
         if (res.data.length > 0) {
           setImages(res.data[0].images); // Only use the first hero's images
         }
