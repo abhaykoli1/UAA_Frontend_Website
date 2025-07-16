@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../api/config";
 
+import image1 from "../../assets/image/Home1.png";
+import image2 from "../../assets/image/Home2.png";
+import image3 from "../../assets/image/Home3.png";
+
+const images2 = { 0: image1, 1: image2, 2: image3 };
+
 function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [images, setImages] = useState([]); // This will hold the images array of heroes[0]
 
+  console.log(images2);
   useEffect(() => {
     const fetchHeroes = async () => {
       try {
@@ -43,7 +50,7 @@ function ImageCarousel() {
         className="flex transition-transform duration-1000 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {images.map((image, index) => (
+        {Object.values(images2).map((image, index) => (
           <div key={index} className="w-full flex-shrink-0">
             <img
               src={image}
@@ -57,7 +64,7 @@ function ImageCarousel() {
 
       {/* Dot Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
+        {Object.values(images2).map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
