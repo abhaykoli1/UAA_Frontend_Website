@@ -17,6 +17,8 @@ import CheckAuth from "./components/common/check-auth";
 import Hero from "./pages/user/hero";
 import ContactUs from "./pages/user/ContactUs";
 import About from "./pages/user/About";
+import Verify from "./pages/auth/verify";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const sampleData = [
@@ -81,24 +83,41 @@ function App() {
   return (
     <div className="">
       <Routes>
-        <Route path="/h" element={<Hero />} />
-
+        {/* Public Routes */}
         <Route
           path="/login"
           element={
-            // <CheckAuth>
-            <Login />
-            // </CheckAuth>
+            <CheckAuth isPublic={true}>
+              <Login />
+            </CheckAuth>
           }
         />
         <Route
           path="/register"
           element={
-            // <CheckAuth>
-            <Register />
-            // </CheckAuth>
+            <CheckAuth isPublic={true}>
+              <Register />
+            </CheckAuth>
           }
         />
+        <Route
+          path="/verify"
+          element={
+            <CheckAuth isPublic={true}>
+              <Verify />
+            </CheckAuth>
+          }
+        />
+        <Route
+          path="/h"
+          element={
+            <CheckAuth isPublic={true}>
+              <Hero />
+            </CheckAuth>
+          }
+        />
+
+        {/* Protected Routes */}
         <Route
           path="/"
           element={
@@ -121,6 +140,7 @@ function App() {
           <Route path="sample/:value" element={<PerticularSample />} />
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

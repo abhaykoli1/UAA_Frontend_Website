@@ -51,7 +51,7 @@ const PerticularService = () => {
     fetchService();
   }, [value]);
 
-  console.log(service[0]);
+  console.log(service);
 
   if (loading)
     return <p className="text-center text-white">Loading service data...</p>;
@@ -63,18 +63,26 @@ const PerticularService = () => {
     <section className=" text-bla py-10">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{value} | Uni Academic Assistance</title>
+        <title>{value}</title>
+        <meta name="keywords" content={service[0]?.seo_keywords} />
         <meta name="description" content={service[0]?.seo_description} />
         <link
           rel="canonical"
+          title="blog"
           href={`https://uniacademicassistance.in/blog/${value}`}
         />
+        {/* <meta name="robots" content="index, follow" />
+        <meta name="author" content="Author Name" />
+        <meta name="publisher" content="Publisher Name" />
+        <html lang="en" /> */}
       </Helmet>
+
       <div className="mx-auto w-full px-10">
         <div className="row">
           <div className="col-md-12 mt-3">
             <div className="text-center shadow bg-white h-[50 rounded-lg p-4">
               <img
+                title={service[0]?.title}
                 src={service[0]?.bannerImg}
                 alt={service[0]?.title}
                 className="max-h-[470px] mx-auto"
@@ -82,19 +90,19 @@ const PerticularService = () => {
             </div>
             <ul className="flex justify-center mt-3 space-x-8">
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-comments text-blue-500"></i>
                   <span className="ml-1">131</span>
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-eye text-blue-500"></i>
                   <span className="ml-1">255</span>
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-comments text-blue-500"></i>
                   <span className="ml-1">14</span>
                 </a>
@@ -115,9 +123,9 @@ const PerticularService = () => {
               </div>
 
               <div className="bg-transparent sticky top-0 px-6 py-6 mt-4 rounded-lg shadow-md border border-purple-600">
-                <h5 className="text-center font-semibold text-xl mb-7">
+                <h2 className="text-center font-semibold text-xl mb-7">
                   Fill your details & get your counselling done.
-                </h5>
+                </h2>
                 {/* <ButtonComponent btnText={"Counselling Help"} /> */}
 
                 <form className="text-center mt-4">
@@ -184,6 +192,7 @@ const PerticularService = () => {
                 <div className="flex gap-5 justify-center">
                   <a
                     href="https://facebook.com"
+                    title="Facebook"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 text-3xl hover:text-blue-800 transition duration-200"
@@ -193,6 +202,7 @@ const PerticularService = () => {
 
                   <a
                     href="https://twitter.com"
+                    title="Twitter"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-400 text-3xl hover:text-blue-600 transition duration-200"
@@ -202,6 +212,7 @@ const PerticularService = () => {
 
                   <a
                     href="https://linkedin.com"
+                    title="LinkedIn"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-700 text-3xl hover:text-blue-900 transition duration-200"

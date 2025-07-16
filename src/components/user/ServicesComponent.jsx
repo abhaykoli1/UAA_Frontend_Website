@@ -42,6 +42,7 @@ const ServicesComponent = ({ item }) => {
             <img
               src={item.service.icon}
               alt={item.service.title}
+              title={item.service.title}
               className="w-16 h-16 rounded-full"
             />
           </div>

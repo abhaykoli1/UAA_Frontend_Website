@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import con from "../../assets/con.png";
+import config from "../../api/config";
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +28,7 @@ function Contact() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8080/api/v1/add-contact-query",
+        `${config.API_BASE_URL}/add-contact-query`,
         {
           name: formData.name,
           phone: formData.phone,
@@ -56,20 +57,19 @@ function Contact() {
   return (
     <section
       id="Contact"
-      className="lg:container lg:px-5  mx-auto pt-10 pb-16 px-4 "
+      className="lg:container lg:px-5  mx-auto pt-10 pb-8 px-4 "
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
         <div className=" rounded-lg w-full">
-          <h1 className="text-4xl font-bold text-main mb-6">
+          <h3 className="text-4xl font-bold text-main mb-6">
             Send Us a Message
-          </h1>
+          </h3>
           <p className="text-lg text-black mb-4">
-            We’d love to hear from you! Whether you have questions about our IT
-            services, need technical support, or are simply exploring how we can
-            help transform your business with reliable tech solutions, feel free
-            to get in touch with us anytime. Our dedicated team is always ready
-            to assist you.
+            We're here to help! You Whether you're academic assistance services,
+            need help with a project, feel free to reach out. Our team is always
+            ready to guide you with quick responses
           </p>
+
           <div className="space-y-4">
             {/* <p className="text-[18px]">
               <strong className="text-main">Office Address:</strong> Manbagh
@@ -78,7 +78,8 @@ function Contact() {
             <p className="text-[18px]">
               <strong className="text-main">Email:</strong>{" "}
               <a
-                href="mailto:info@avbigbuddy.site"
+                href="mailto:uniassignassets@gmail.com"
+                title="UAA Email"
                 className="hover:underline text-black"
               >
                 uniassignassets@gmail.com
@@ -88,15 +89,23 @@ function Contact() {
               <strong className="text-main">Phone:</strong> +91 7597981703
             </p>
           </div>
+          <img
+            src={con}
+            alt="contact us"
+            title="contact us"
+            className="w-[60%] h-auto mx-auto "
+          />
         </div>
 
         {/* Contact Form Section */}
         <div className=" rounded-lg w-full  text-black">
-          <h1 className="text-4xl font-bold text-main mb-6">
-            We are here to <span className="text-black">assist</span> you!
-          </h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <h3 className="text-4xl font-bold text-main mb-6 capitalize">
+            We are here to <span className="text-black uppercase">assist</span>{" "}
+            you!
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
+              <label>Name :</label>
               <input
                 name="name"
                 value={formData.name}
@@ -110,30 +119,37 @@ function Contact() {
 
             <div>
               <div className="flex items-center space-x-2">
-                <select
-                  name="country_code"
-                  value={formData.country_code}
-                  onChange={handleChange}
-                  className="p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
-                >
-                  <option value="+91">+91 (India)</option>
-                  <option value="+1">+1 (US)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+61">+61 (Australia)</option>
-                </select>
-                <input
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="Phone Number"
-                  className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
-                  required
-                />
+                <div className="w- flex flex-col">
+                  <label>Code :</label>
+                  <select
+                    name="country_code"
+                    value={formData.country_code}
+                    onChange={handleChange}
+                    className="p-[13px] rounded-lg -mt-2 outline-none border border-gray-700 focus:border-main"
+                  >
+                    <option value="+91">+91 (India)</option>
+                    <option value="+1">+1 (US)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+61">+61 (Australia)</option>
+                  </select>
+                </div>
+                <div className="w-full">
+                  <label>Phone :</label>
+                  <input
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="Phone Number"
+                    className="w-full p-3 rounded-lg outline-none border border-gray-700 focus:border-main"
+                    required
+                  />
+                </div>
               </div>
             </div>
 
             <div>
+              <label>Email :</label>
               <input
                 name="email"
                 value={formData.email}
@@ -145,6 +161,7 @@ function Contact() {
               />
             </div>
             <div>
+              <label>Message :</label>
               <textarea
                 name="message"
                 value={formData.message}

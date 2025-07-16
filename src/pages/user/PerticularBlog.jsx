@@ -69,9 +69,11 @@ const PerticularBlog = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{value.value} | Uni Academic Assistance</title>
-        <meta name="description" content={Blog.seo_description} />
+        <meta name="keywords" content={Blog?.seo_keywords} />
+        <meta name="description" content={Blog?.seo_description} />
         <link
           rel="canonical"
+          title={Blog?.title}
           href={`https://uniacademicassistance.in/blog/${value.value}`}
         />
       </Helmet>
@@ -81,24 +83,26 @@ const PerticularBlog = () => {
             <div className="text-center shadow bg-white h-[500px] rounded-lg p-4">
               <img
                 src={Blog.bannerImg}
+                alt={Blog?.title}
+                title={Blog?.title}
                 className=" w-auto max-h-[470px]  mx-auto"
               />
             </div>
             <ul className="flex justify-center mt-3 space-x-8">
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-comments text-blue-500"></i>
                   <span className="ml-1">131</span>
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-eye text-blue-500"></i>
                   <span className="ml-1">255</span>
                 </a>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
-                <a href="#" className="hover:underline">
+                <a href="#" title="#" className="hover:underline">
                   <i className="fa fa-comments text-blue-500"></i>
                   <span className="ml-1">14</span>
                 </a>
@@ -113,7 +117,7 @@ const PerticularBlog = () => {
           {/* Left Section */}
 
           <div className="lef">
-            <h3 className="font-bold text-xl text-black mb-3">{Blog.title}</h3>
+            <h1 className="font-bold text-xl text-black mb-3">{Blog.title}</h1>
             {/* <p>{Blog.shortDec}</p> */}
             <p className="mt-5">{Blog.description}</p>
 
@@ -132,6 +136,7 @@ const PerticularBlog = () => {
                   <a
                     href="https://facebook.com"
                     target="_blank"
+                    title="Facebook"
                     rel="noopener noreferrer"
                     className="text-blue-600 text-3xl hover:text-blue-800 transition duration-200"
                   >
@@ -142,6 +147,7 @@ const PerticularBlog = () => {
                   <a
                     href="https://twitter.com"
                     target="_blank"
+                    title="Twitter"
                     rel="noopener noreferrer"
                     className="text-blue-400 text-3xl hover:text-blue-600 transition duration-200"
                   >
@@ -152,6 +158,7 @@ const PerticularBlog = () => {
                   <a
                     href="https://linkedin.com"
                     target="_blank"
+                    title="LinkedIn"
                     rel="noopener noreferrer"
                     className="text-blue-700 text-3xl hover:text-blue-900 transition duration-200"
                   >

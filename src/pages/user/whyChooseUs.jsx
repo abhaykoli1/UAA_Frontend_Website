@@ -6,6 +6,7 @@ import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import { useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import choose from "../../assets/choose.png";
 
 const AccordionItem = ({ title, children, isOpen, onToggle }) => {
   const [height, setHeight] = useState("0px");
@@ -56,24 +57,22 @@ const WhyChooseUS = ({ items }) => {
     <section className="lg:container px-4 sm:px-8 lg:px-5  mx-auto  ">
       <div className="grid lg:grid-cols-[450px_1fr] md:grid-cols-[450px_1fr] grid-cols-1 gap-10">
         <div>
-          <h1 className="font-bold text-2xl sm:text-3xl mb-4">Why Choose Us</h1>
+          <h3 className="font-bold text-2xl sm:text-3xl mb-2">Why Choose Us</h3>
           <p className="text-base sm:text-lg mb-6">
-            Yes, relying too heavily on an online essay sample can be risky.
-            Students may unintentionally mimic the structure or content of a
-            sample without understanding the underlying concepts.
+            At Uni Academic Assistance, we offer original, high-quality, and
+            concept-based support to help you
           </p>
 
-          <div className="text-center mt-10">
+          <div className="text-center ">
             <img
-              src="https://picsum.photos/500/200"
-              className="mb-5 rounded-lg w-full h-auto"
-              alt="support image"
+              // src={choose}
+              className="mb-5 w-full rounded-lg mx-auto h-auto mt-5"
+              alt="Why Choose Us"
+              title="Why Choose Us"
             />
-            <h2 className="font-bold text-xl sm:text-2xl pb-3">
-              Need Support?
-            </h2>
+            <h2 className="font-bold text-xl sm:text-2xl ">Need Support?</h2>
 
-            <div className="flex gap-4 justify-center mt-6">
+            <div className="flex gap-4 justify-center mt-4">
               <button className="bg-green-500 w-28 sm:w-32 py-2 rounded-lg hover:scale-[102%] transition-all duration-300">
                 <a
                   href={`tel:${7597981703}`}
@@ -95,7 +94,7 @@ const WhyChooseUS = ({ items }) => {
                   href={
                     "http://api.whatsapp.com/send/?phone=7597981703&text&type=phone_number&app_absent=0"
                   }
-                  // href="mailto:uniassignassets@gmail.com"
+                  title="WhatsApp"
                   className="flex items-center flex-col"
                 >
                   <FontAwesomeIcon

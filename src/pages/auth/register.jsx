@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { loginUser, registerUser } from "../../api/apiAuth";
 import sm from "../../assets/sm.png";
+import config from "../../api/config";
+import axios from "axios";
+import { toast } from "react-toastify";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -9,8 +12,8 @@ const Register = () => {
     phone: "",
     country_code: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -20,44 +23,50 @@ const Register = () => {
     }));
   };
 
+  console.log("formData", formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const response = await registerUser(formData);
-      if (response.status === 401) {
-        setSuccessMessage("user already exist!");
-      }
-      if (response.status === 201 || response.status === 200) {
-        setSuccessMessage("Registration successful!");
-        setFormData({
-          name: "",
-          email: "",
-          password: "",
-          phone: "",
-          country_code: "",
-        });
-      }
+      const response = await axios.post(
+        `${config.API_BASE_URL}/user-create`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Registration Success:", response.data.message);
+      toast.success(response.data.message);
+
+      // Clear form
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        country_code: "",
+      });
     } catch (error) {
-      setErrorMessage("Registration failed. Please try again.");
-      console.error("Error registering user:", error);
+      console.log("Registration Error:", error.response?.data);
+      console.log(error.message);
+      toast.error(error.response?.data?.detail);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex">
-      <div className="grid grid-cols-[450px_1fr]">
-        <div className="bg-white shadow-md p-10 w-full  flex flex-col items-cente justify-center">
+    <div className="bg-white min-h-screen ">
+      <div className="grid lg:grid-cols-[450px_1fr] md:grid-cols-[450px_1fr] grid-cols-1  ">
+        <div className="p-5 w-full flex flex-col h-screen  justify-center max-w-[480px] mx-auto">
           <h1 className="text-2xl font-bold text-purple-600 text-center mb-6">
             SIGN UP
           </h1>
-          {errorMessage && (
-            <div className="text-red-500 text-center mb-4">{errorMessage}</div>
-          )}
-          {successMessage && (
-            <div className="text-green-500 text-center mb-4">
-              {successMessage}
-            </div>
-          )}
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-black font-medium ">
@@ -110,7 +119,7 @@ const Register = () => {
                   id="country_code" // Ensure consistency with state key
                   value={formData.country_code}
                   onChange={handleChange}
-                  className="px-4 py-[9.5px] border rounded-l-lg text-black  focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="px-4 py-[9.5px] border rounded-l-lg !text-black  focus:outline-none focus:ring-2 focus:ring-purple-600"
                 >
                   <option value="+1">+1</option>
                   <option value="+44">+44</option>
@@ -121,7 +130,7 @@ const Register = () => {
                   id="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-r-lg text-white  focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  className="w-full px-4 py-2 border rounded-r-lg text-black  focus:outline-none focus:ring-2 focus:ring-purple-600"
                   placeholder="1234567890"
                 />
               </div>
@@ -130,7 +139,7 @@ const Register = () => {
               type="submit"
               className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700 transition"
             >
-              Register
+              {loading ? "Sending Verification Email..." : "Register"}
             </button>
           </form>
           <div className="text-center mt-4">
@@ -138,6 +147,7 @@ const Register = () => {
               Already have an account?
               <a
                 href="/login"
+                title="Login"
                 className="text-purple-600 hover:underline  ml-1"
               >
                 Login here
@@ -145,8 +155,8 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <div className="flex  bg-white w-[100]">
-          <img src={sm} />
+        <div className="lg:flex md:flex hidden  bg-white w-[100]">
+          <img src={sm} alt="Banner" title="Banner" className="object-cover" />
         </div>
       </div>
     </div>

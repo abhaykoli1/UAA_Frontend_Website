@@ -13,7 +13,7 @@ const Header = ({ sidebar, toggleSidebar }) => {
   ];
 
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
 
   function goTop() {
     window.scrollTo({
@@ -26,15 +26,16 @@ const Header = ({ sidebar, toggleSidebar }) => {
     <div className="h-20 shadow-xl sticky top-0 bg-white text-black flex justify-between items-center">
       <div className="w-full lg:container mx-auto lg:px-0 px-5 flex justify-between items-center">
         <div className="flex items-center justify-between w-full">
-          <div>
-            <img src={Logo} alt="Logo" className="h-24" />
-          </div>
+          <a href="/" className="flex items-center" title="Logo">
+            <img src={Logo} alt="Logo" className="h-24" title="UAA_Logo" />
+          </a>
           <div className="items-center gap-4 lg:flex md:flex hidden">
             <nav className="flex gap-4">
               {links.map((link, index) => (
                 <NavLink
                   onClick={() => goTop()}
                   key={index}
+                  title={link.path}
                   to={link.path}
                   className={({ isActive }) =>
                     `hover:underline hover:text-black font-bold ${
@@ -50,12 +51,14 @@ const Header = ({ sidebar, toggleSidebar }) => {
               <nav className="flex gap-4">
                 <a
                   href="/login"
+                  title="Login"
                   className="px-0 py-1.5  text-black font-bold hover:text-main duration-500"
                 >
                   Log In
                 </a>
                 <a
                   href="/register"
+                  title="Sign Up"
                   className="border font-bold  hover:border-white px-2 mr-3 py-1.5 bg-purple-600 border-purple-600 text-white rounded-md hover:bg-black hover:text-white cursor-pointer duration-700 transition outline-none"
                 >
                   Sign Up
@@ -64,7 +67,7 @@ const Header = ({ sidebar, toggleSidebar }) => {
             ) : (
               <a
                 onClick={() => {
-                  localStorage.setItem("isLoggedIn", "false");
+                  sessionStorage.setItem("isLoggedIn", "false");
                   navigate("/");
                 }}
                 className="border font-bold mr-3 hover:border-white px-2 py-1.5 bg-main border-purple-600 text-white rounded-md hover:bg-black hover:text-white cursor-pointer duration-700 transition outline-none"

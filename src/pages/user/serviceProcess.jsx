@@ -52,9 +52,9 @@ const steps = [
 const ServicesProcess = () => {
   return (
     <section className="mx-auto lg:container lg:px-0 pt-10 flex flex-col items-center">
-      <h1 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
-        Process
-      </h1>
+      <h3 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
+        Our Process
+      </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 px-4 sm:px-8 lg:px-10">
         {steps.map((step) => (
@@ -68,7 +68,6 @@ const ServicesProcess = () => {
                 fade
                 className="h-12 p-3 text-main"
               />
-              {/* {step.icon} */}
             </div>
             <h2 className="text-xl sm:text-2xl font-semibold text-main">
               {step.title}

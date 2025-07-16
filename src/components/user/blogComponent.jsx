@@ -22,24 +22,17 @@ const BlogComponent = ({ blog }) => {
       <div className="flex flex-col justify-between h-full ">
         <img
           src={blog.blog.bannerImg}
-          alt="Blog Post"
+          title={blog.blog.title}
+          alt={blog.blog.title}
           className="w-ful h-60 w-[500px] object-cover border-b"
         />
         {/* Content */}
         <div className="flex justify-between  flex-col h-[100%] ">
           <div className="px-6 py-4 ">
-            <h2 className="text-2xl font-semibold text-gray-800 ">
+            <h2 className="text-2xl font-semibold text-gray-800 line-clamp-1 ">
               {blog.blog.title}
             </h2>
-            <p
-              className="text-gray-700 mt-2"
-              // style={{
-              //   display: "-webkit-box",
-              //   WebkitLineClamp: 5,
-              //   WebkitBoxOrient: "vertical",
-              //   overflow: "hidden",
-              // }}
-            >
+            <p className="text-gray-700 mt-2 line-clamp-3">
               {blog.blog.shortDec}
             </p>
           </div>

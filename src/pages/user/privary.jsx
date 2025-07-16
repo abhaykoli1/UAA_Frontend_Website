@@ -2,19 +2,19 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="bg-black min-h-screen py-10 px-6">
-      <div className="px-10 mx-auto  shadow-md rounded-lg p-6 ">
-        <h1 className=" font-bold text-white text-center ">
+    <div className="p-5 container mx-auto">
+      <div className="px-5">
+        <h1 className=" font-bold text-black text-center ">
           Revision and <span className="text-pink-500">Refund Policy</span>
         </h1>
-        <p className="text-white text-center font mb-14 pt-2 pb-10 border-b border-gray-300">
+        <p className="text-black text-center font mb-14 pt-2 pb-10 border-b border-gray-300">
           Comprehensive Assignment Assistance With a No-AI Guarantee!
         </p>
 
         <h2 className="text-xl font-bold text-pink-500 mb-3">
           Refund / Money-back Guarantee Policy
         </h2>
-        <p className="text-white mb-10">
+        <p className="text-black mb-10">
           The company is held responsible for delivering the product in a timely
           manner and according to the Customer requirements indicated in the
           order. Should any of the company's commitments be violated, the

@@ -72,7 +72,7 @@ function Footer() {
     <footer className="border-t-[0.5px] border-gray-600 bg-[#111] text-white pt-10">
       <div className="container mx-auto gap-10 px-4 grid lg:grid-cols-[500px_1fr] md:grid-cols-1 grid-cols-1">
         <div>
-          <img src={logo} className="lg:-ml-20 " />
+          <img src={logo} alt="Map" title="Map" className="lg:-ml-20 " />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -86,7 +86,8 @@ function Footer() {
                   <li key={idx}>
                     <Link
                       to={link.to}
-                      // onClick={() => goTop()}
+                      title={link.to}
+                      onClick={() => goTop()}
                       className="text-white  hover:text-main duration-500"
                     >
                       {link.name}
@@ -98,19 +99,50 @@ function Footer() {
           ))}
 
           <div className="flex gap-2 lg:flex-nowrap  flex-wrap">
-            <img src={rozar} alt="Paypal" className="h-10 rounded-md" />
-            <img src={gpay} alt="Paypal" className="h-10 rounded-md" />
-            <img src={paytm} alt="Paypal" className="h-10 rounded-md" />
-            <img src={phonepay} alt="Paypal" className="h-10 rounded-md" />
-            <img src={visa} alt="Paypal" className="h-10 rounded-md bg-white" />
-            <img src={upi} alt="Paypal" className="h-10 rounded-md" />
+            <img
+              src={rozar}
+              alt="rozar pay"
+              title="rozar pay"
+              className="h-10 rounded-md"
+            />
+            <img
+              src={gpay}
+              alt="google pay"
+              title="google pay"
+              className="h-10 rounded-md"
+            />
+            <img
+              src={paytm}
+              alt="paytm"
+              title="paytm"
+              className="h-10 rounded-md"
+            />
+            <img
+              src={phonepay}
+              alt="phone pay"
+              title="phone pay"
+              className="h-10 rounded-md"
+            />
+            <img
+              src={visa}
+              alt="visa"
+              title="visa"
+              className="h-10 rounded-md bg-white"
+            />
+            <img src={upi} alt="upi" title="upi" className="h-10 rounded-md" />
           </div>
         </div>
       </div>
       <div className="bg-indigo-8 bg-main py-7 mt-8 text-center text-white text-sm">
         <p>
-          &copy; {new Date().getFullYear()} UAA | Powered by UNI ACADEMIC
-          ASSISTANCE
+          &copy; {new Date().getFullYear()} UAA | Powered by{" "}
+          <a
+            className="text-white cursor-pointer hover:text-white hover:!underline"
+            title="UAA"
+            href="https://uniacademicassistance.in"
+          >
+            UNI ACADEMIC ASSISTANCE
+          </a>
         </p>
 
         <p className="max-w-screen-lg mx-auto my-3">
@@ -120,29 +152,30 @@ function Footer() {
         </p>
 
         <div className="flex gap-5 text-white justify-center items-center mt-3">
-          {/* Facebook */}
           <a
             href="https://facebook.com"
             target="_blank"
+            title="Facebook"
             rel="noopener noreferrer"
             className="text-xl transition duration-200 hover:text-black  hover:scale-[102%] text-white"
           >
             <FontAwesomeIcon icon={faFacebookF} />
           </a>
 
-          {/* Twitter */}
           <a
             href="https://twitter.com"
+            title="Twitter"
             target="_blank"
             rel="noopener noreferrer"
             className=" text-[22px] text-white hover:scale-[102%] hover:text-black transition duration-200 mt-[2px]"
           >
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-          {/* Instagram */}
+
           <a
             href="https://www.instagram.com/uniassignassets/"
             target="_blank"
+            title="Instagram"
             rel="noopener noreferrer"
             className="text-[22px] text-white hover:scale-[102%] hover:text-black  transition duration-200 mt-[2px]"
           >
@@ -151,6 +184,7 @@ function Footer() {
           {/* LinkedIn */}
           <a
             href="https://linkedin.com"
+            title="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:scale-[102%] hover:text-black text-2xl transition duration-200"
@@ -164,17 +198,24 @@ function Footer() {
           className="flex  shadow-2xl justify-center items-center border bg-main lg:h-16 lg:w-16 md:h-14 md:w-14 h-10 w-10 fixed right-5 bottom-5 rounded-full z-50 cursor-pointer"
           onClick={() => goTop()}
         >
-          <img src={scroll} className="rotate-180" />
+          <img
+            src={scroll}
+            alt="Scroll Up"
+            className="rotate-180"
+            title="Scroll Up"
+          />
         </div>
       )}
       <a
         target="_black"
+        title="whatsapp"
+        rel="noopener noreferrer"
         href={
           "http://api.whatsapp.com/send/?phone=7597981703&text&type=phone_number&app_absent=0"
         }
         className="flex justify-center items-center lg:h-24 lg:w-24 md:h-20 md:w-20 h-16 w-16 fixed left-5 bottom-3  rounded-md z-50 cursor-pointer"
       >
-        <img src={whatsapp} />
+        <img src={whatsapp} alt="whatsapp" title="whatsapp" />
       </a>
     </footer>
   );

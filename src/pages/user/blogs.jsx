@@ -26,12 +26,13 @@ const Blogs = () => {
     <section className="bg-gradient-to-br from-blue-100/50 to-white w-full">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Blog | Uni Academic Assistance </title>
-        <meta
-          name="description"
-          content="This is the description of my page."
+        <title>Blogs | Uni Academic Assistance </title>
+        <meta name="description" content="uniacademicassistance" />
+        <link
+          rel="canonical"
+          title="Blogs"
+          href="https://uniacademicassistance.in/blogs"
         />
-        <link rel="canonical" href="https://uniacademicassistance.in/blogs" />
       </Helmet>
       <div className="mx-auto lg:">
         <div className=" px-10 pt-10 text-center">
@@ -52,7 +53,7 @@ const Blogs = () => {
                 <li>Academic Integrity in Universities</li>
               </ol>
             </div>
-            <img src={pick} />
+            <img src={pick} alt="pick image" title="pick image" />
           </div>
           <div>
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2  ">

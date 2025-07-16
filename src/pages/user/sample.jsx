@@ -12,6 +12,8 @@ const Sample = () => {
   const [error, setError] = useState(null);
   console.log(samples);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchSamples();
   }, []);
@@ -20,14 +22,13 @@ const Sample = () => {
     try {
       const response = await axios.get(`${config.API_BASE_URL}/all-sample`);
       setSamples(response.data.data);
-      console.log(response);
+      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching all Samples:", error);
     } finally {
       setLoading(false);
     }
   };
-
   if (loading) return <p>Loading samples...</p>;
   if (error) return <p>{error}</p>;
 
@@ -40,7 +41,11 @@ const Sample = () => {
           name="description"
           content="This is the description of my page."
         />
-        <link rel="canonical" href="https://uniacademicassistance.in/samples" />
+        <link
+          rel="canonical"
+          title="samples"
+          href="https://uniacademicassistance.in/samples"
+        />
       </Helmet>
       <div className="px-10 pt-10 pb- text-center">
         <h1 className="font-bold text-5xl  pt-7 pb-4 uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
@@ -58,8 +63,8 @@ const Sample = () => {
 
         <div className="!grid lg:px-10 md:px-10 sm:px-4 lg:gap-8 md:gap-8 sm:gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
           {samples.length > 0 &&
-            samples.map((sample) => (
-              <SampleComponent key={sample.id} sample={sample} />
+            samples.map((sample, index) => (
+              <SampleComponent key={index} sample={sample} />
             ))}
         </div>
       </div>

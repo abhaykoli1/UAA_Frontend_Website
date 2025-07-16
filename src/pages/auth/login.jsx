@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import sm from "../../assets/sm.png";
+import axios from "axios";
+import config from "../../api/config";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
+  console.log("formData", formData);
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -20,56 +21,53 @@ const Login = () => {
     }));
   };
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+  // user-login
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await loginUser(formData);
-      if (response.status === 401) {
-        toast.error("User does not exist or invalid credentials.", {
-          position: "top-right",
-        });
-        setErrorMessage("User does not exist or invalid credentials.");
-      } else if (response.status === 200) {
-        localStorage.setItem("isLoggedIn", "true");
-        toast.success("Login successful!", {
-          position: "top-right",
-        });
-        setSuccessMessage("Login successful!");
-        setTimeout(() => {
-          navigate("/");
-        }, [2000]);
-        setFormData({
-          email: "",
-          password: "",
-        });
+      const response = await axios.post(
+        `${config.API_BASE_URL}/user-login`,
+        formData
+      );
 
-        setErrorMessage("");
+      console.log(response);
+      if (response.status === 200) {
+        const { data } = response;
+
+        const currentTime = Date.now();
+
+        navigate("/");
+        sessionStorage.setItem("isLoggedIn", true);
+        sessionStorage.setItem("userId", data.id);
+        sessionStorage.setItem("loginTime", Date.now().toString());
+        toast.success(data.message);
+
+        setFormData({ email: "", password: "" });
+      } else {
+        toast.error(response.data.detail || "Login failed.");
       }
     } catch (error) {
-      toast.error("Login failed. Please try again.", {
-        position: "top-right",
-      });
-      setErrorMessage("Login failed. Please try again.");
-      console.error("Error logging in user:", error);
+      console.log(error);
+      toast.error(
+        error.response?.data?.detail || "Failed to login. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex">
-      <div className="grid grid-cols-[450px_1fr]">
-        <div className="bg-white shadow-md p-10 w-full flex flex-col  justify-center">
+    <div className="bg-white min-h-screen ">
+      <div className="grid lg:grid-cols-[450px_1fr] md:grid-cols-[450px_1fr] grid-cols-1  ">
+        <div className="p-5 w-full flex flex-col h-screen  justify-center max-w-[480px max-w-[100%] mx-auto">
           <h1 className="text-2xl font-bold text-purple-600 text-center mb-6">
             LOGIN
           </h1>
-          {errorMessage && (
-            <div className="text-red-500 text-center mb-4">{errorMessage}</div>
-          )}
-          {successMessage && (
-            <div className="text-green-500 text-center mb-4">
-              {successMessage}
-            </div>
-          )}
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-black font-medium ">
@@ -103,7 +101,11 @@ const Login = () => {
               />
             </div>
             <div className="flex items-center justify-between mb-4">
-              <a href="#" className="text-sm text-purple-600 hover:underline">
+              <a
+                href="#"
+                className="text-sm text-purple-600 hover:underline"
+                title="Forgot Password"
+              >
                 Forgot Password?
               </a>
             </div>
@@ -111,7 +113,7 @@ const Login = () => {
               type="submit"
               className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700 transition"
             >
-              Login
+              {loading ? "Loging..." : "Login"}
             </button>
           </form>
           <div className="text-center mt-4">
@@ -119,6 +121,7 @@ const Login = () => {
               Don't have an account?
               <a
                 href="/register"
+                title="Register"
                 className="text-purple-600 hover:underline ml-1"
               >
                 Register here
@@ -126,12 +129,10 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className="flex bg-white w-[100%]">
-          {" "}
-          <img src={sm} className="object-cover" />
+        <div className=" lg:flex md:flex hidden  bg-white w-[100%]">
+          <img src={sm} alt="Banner" title="Banner" className="object-cover " />
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

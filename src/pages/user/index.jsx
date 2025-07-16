@@ -89,19 +89,20 @@ const Home = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Uni Academic Assistance</title>
-        <meta name="description" content="sdsjkdbsyub" />
+        <meta name="description" content="uniacademicassistance" />
         <link
           rel="canonical"
-          href="https://uniacademicassistance.in/services"
+          title="Home Page"
+          href="https://uniacademicassistance.in"
         />
       </Helmet>
-      {/* <Hero /> */}
+
       <ImageCarousel />
       <Page1 />
       <ServicesProcess />
-      <h1 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
+      <h3 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
         Tranding Services
-      </h1>
+      </h3>
       <section className="mx-auto lg:container grid lg:px-5  px-5 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-8">
         {services.map((item) => (
           <ServicesComponent item={item} />
@@ -110,21 +111,31 @@ const Home = () => {
       <div className="flex justify-center mt-10 w-full ">
         <a
           href="/services"
-          className="text-white flex items-center justify-center hover:text-white bg-main w-60 h-16 rounded-full hover:scale-105 duration-500 transition-all"
+          title="Services"
+          className="text-white flex text-xl font-semibold items-center justify-center hover:text-white hover:shadow-xl hover:!cursor-pointer bg-main w-52 h-14 rounded-full hover:scale-105 duration-500 transition-all"
         >
           View More
         </a>
       </div>
       <Counter />
       <WhyChooseUS items={accordionItems} />
-      <h1 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
+      <h3 className="font-bold  text-2xl sm:text-3xl lg:text-4xl pt-7 pb-4 text-center uppercase bg-gradient-to-r from-main to-pink-500 bg-clip-text text-transparent">
         Blogs & Articles
-      </h1>
+      </h3>
       <section className="mx-auto lg:container px-5 lg:px-5  grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-10">
         {Blogs.map((blog) => (
           <BlogComponent key={blog.id} blog={blog} />
         ))}
       </section>
+      <div className="flex justify-center mt-3 w-full ">
+        <a
+          href="/blogs"
+          title="Blogs"
+          className="text-white flex text-xl font-semibold items-center justify-center hover:text-white hover:shadow-xl hover:!cursor-pointer bg-main w-52 h-14 rounded-full hover:scale-105 duration-500 transition-all"
+        >
+          All Blogs
+        </a>
+      </div>
       <Contact />
     </section>
   );

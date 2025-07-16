@@ -11,7 +11,11 @@ function About() {
           name="description"
           content="This is the description of my page."
         />
-        <link rel="canonical" href="https://uniacademicassistance.in/about" />
+        <link
+          rel="canonical"
+          title="About Us"
+          href="https://uniacademicassistance.in/about"
+        />
       </Helmet>
       <h1 className=" font-bold mb-4 text-center">About Us</h1>
       <p className="text-lg text-black text-center mb-14">

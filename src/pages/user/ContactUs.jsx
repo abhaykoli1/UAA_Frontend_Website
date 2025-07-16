@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import contactImg from "../../assets/image/contact.jpg";
+import config from "../../api/config";
 function ContactUs() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +28,7 @@ function ContactUs() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8080/api/v1/add-contact-query",
+        `${config.API_BASE_URL}/add-contact-query`,
         {
           name: formData.name,
           phone: formData.phone,
