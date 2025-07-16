@@ -18,6 +18,8 @@ function ImageCarousel() {
       }
     };
 
+    // sdsd;
+
     fetchHeroes();
   }, []);
 
