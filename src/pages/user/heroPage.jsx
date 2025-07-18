@@ -62,6 +62,8 @@ function ImageCarousel() {
         ))}
       </div>
 
+      {/* sdsd */}
+
       {/* Dot Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {Object.values(images2).map((_, index) => (
